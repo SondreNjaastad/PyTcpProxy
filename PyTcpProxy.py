@@ -3,12 +3,18 @@ import threading
 import argparse
 import datetime
 from systemd import journal
+import datetime
+
 
 LISTEN_PORT = 5000
 TARGET_SERVER = None
 TARGET_PORT = None
 LOG_TO_TERMINAL = False
 LOG_TO_SYSTEMD = False
+
+def generate_session_id():
+    now = datetime.datetime.now()
+    return now.strftime("%Y%m%d%H%M%S%f")
 
 def log(message):
     if LOG_TO_TERMINAL:
@@ -73,11 +79,10 @@ def main():
 
     log(f"Listening on port {LISTEN_PORT}...")
 
-    session_id = 0
     while True:
         client_socket, addr = listener.accept()
+        session_id = generate_session_id()
         log(f"Session {session_id}: Accepted connection from {addr}")
-        session_id += 1
         threading.Thread(target=handle_client, args=(client_socket, session_id)).start()
 
 if __name__ == "__main__":
