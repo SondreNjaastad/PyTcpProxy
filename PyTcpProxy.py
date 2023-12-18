@@ -14,7 +14,7 @@ def log(message):
     if LOG_TO_TERMINAL:
         print(message)
     if LOG_TO_SYSTEMD:
-        journal.write(message, SYSLOG_IDENTIFIER="PyTcpTool", PRIORITY=journal.Priority.INFO)
+        journal.send(message)
 
 def parse_args():
     global LISTEN_PORT, TARGET_SERVER, TARGET_PORT, LOG_TO_TERMINAL, LOG_TO_SYSTEMD
