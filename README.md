@@ -15,7 +15,11 @@
 To use `PyTcpProxy`, you need Python installed on your system. Clone this repository to your local machine using:
 
 ```bash
+sudo apt-get update
+sudo apt-get install libsystemd-dev
 git clone https://github.com/SondreNjaastad/PyTcpProxy.git
+cd PyTcpProxy
+pip install -r requirements.txt
 ```
 
 Navigate to the cloned directory:
